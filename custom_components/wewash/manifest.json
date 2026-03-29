@@ -1,0 +1,12 @@
+{
+  "domain": "wewash",
+  "name": "WeWash",
+  "version": "1.0.0",
+  "config_flow": true,
+  "dependencies": [],
+  "codeowners": ["@bhunecke"],
+  "requirements": [],
+  "iot_class": "cloud_polling",
+  "documentation": "https://github.com/bhunecke/wewash-ha",
+  "issue_tracker": "https://github.com/bhunecke/wewash-ha/issues"
+}

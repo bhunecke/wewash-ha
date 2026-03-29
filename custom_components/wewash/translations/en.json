@@ -1,0 +1,16 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "WeWash Setup",
+                "description": "Paste your ww_refresh token from your browser cookies on app.we-wash.com",
+                "data": {
+                    "ww_refresh": "Refresh Token (ww_refresh)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Could not connect to WeWash. Check your token and try again."
+        }
+    }
+}
