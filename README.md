@@ -4,6 +4,13 @@ Integrates [WeWash](https://we-wash.com) laundry room availability into Home Ass
 
 ## Installation
 
+In HACS, select "Custom repositories" and add:
+
+- Repository: `https://github.com/bhunecke/wewash-ha`
+- Type: `Integration`
+
+Afterwards download the integration via HACS:
+
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=bhunecke&repository=wewash-ha)
 
 ## Setup
@@ -11,10 +18,14 @@ Integrates [WeWash](https://we-wash.com) laundry room availability into Home Ass
 1. Install via HACS
 2. Restart Home Assistant
 3. Go to Settings → Devices & Services → Add Integration → WeWash
-4. Paste your `ww_refresh` cookie from app.we-wash.com
+4. Paste your `ww_refresh` token
 
 ## Getting your refresh token
 
 1. Open [app.we-wash.com](https://app.we-wash.com) and log in
-2. Open DevTools → Application → Cookies → `https://app.we-wash.com`
-3. Copy the value of `ww_refresh`
+2. Press F12 to open the browser DevTools
+3. Go to the Application tab (might be hidden in an overflow menu)
+4. Expand the "Cookies" item in the list, click on `https://app.we-wash.com`
+5. Copy the value of `ww_refresh`
+
+![Get token](get_token.png)
