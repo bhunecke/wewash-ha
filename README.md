@@ -4,7 +4,7 @@ Integrates [WeWash](https://we-wash.com) laundry room availability into Home Ass
 
 ## Installation
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=yourgithubusername&repository=wewash-ha&category=integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=bhunecke&repository=wewash-ha)
 
 ## Setup
 
