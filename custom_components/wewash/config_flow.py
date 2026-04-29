@@ -19,6 +19,11 @@ class WeWashConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             except Exception:
                 errors["base"] = "cannot_connect"
             else:
+                # Overwrite any existing tokens in .storage with the new ones from this config flow
+                from homeassistant.helpers.storage import Store
+                store = Store(self.hass, 1, "wewash_tokens")
+                await store.async_save(tokens)
+
                 # Store the validated tokens and create the entry
                 return self.async_create_entry(
                     title="WeWash",
