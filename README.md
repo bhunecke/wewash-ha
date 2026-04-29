@@ -2,6 +2,10 @@
 
 Integrates [WeWash](https://we-wash.com) laundry room availability into Home Assistant.
 
+> [!IMPORTANT]
+> - Using this integration is solely at your own risk and, in theory, could lead to your account being blocked for improper API use.
+> - You will most likely be logged out regularly from the WeWash web app. The mobile app, however, does not seem to be affected.
+
 ## Installation
 
 In HACS, select "Custom repositories" and add:
