@@ -56,7 +56,7 @@ class WeWashCoordinator(DataUpdateCoordinator):
             )
             await self._save_tokens(new_tokens)
 
-            r = await self.hass.async_add_executor_job(
+            r_rooms = await self.hass.async_add_executor_job(
                 lambda: requests.get(
                     "https://backend.we-wash.com/v3/users/me/laundry-rooms",
                     headers={
@@ -68,8 +68,27 @@ class WeWashCoordinator(DataUpdateCoordinator):
                     cookies={"ww_access": new_tokens["ww_access"]},
                 )
             )
-            r.raise_for_status()
-            data = r.json()
-            return data["selectedLaundryRooms"]
+            r_rooms.raise_for_status()
+            data_rooms = r_rooms.json()
+
+            r_reservations = await self.hass.async_add_executor_job(
+                lambda: requests.get(
+                    "https://backend.we-wash.com/v3/users/me/reservations",
+                    headers={
+                        "accept": "application/json",
+                        "origin": "https://app.we-wash.com",
+                        "ww-app-version": "2.76.0",
+                        "ww-client": "USERAPP",
+                    },
+                    cookies={"ww_access": new_tokens["ww_access"]},
+                )
+            )
+            r_reservations.raise_for_status()
+            data_reservations = r_reservations.json()
+
+            return {
+                "laundry_rooms": data_rooms.get("selectedLaundryRooms", []),
+                "reservations": data_reservations.get("items", [])
+            }
         except Exception as e:
             raise UpdateFailed(f"WeWash update failed: {e}")
