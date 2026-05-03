@@ -24,7 +24,7 @@ class WeWashCoordinator(DataUpdateCoordinator):
     async def _load_tokens(self) -> dict:
         data = await self._store.async_load()
         if not data:
-            raise UpdateFailed("No WeWash tokens found. Bootstrap wewash_tokens in .storage first.")
+            raise UpdateFailed("No WeWash tokens found. Please set up the integration first.")
         return data
 
     async def _save_tokens(self, tokens: dict):
