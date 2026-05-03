@@ -23,6 +23,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
         
         entities.append(WeWashReservationStatusSensor(coordinator, entry.entry_id))
         entities.append(WeWashReservationApplianceSensor(coordinator, entry.entry_id))
+        entities.append(WeWashReservationApplianceTypeSensor(coordinator, entry.entry_id))
         entities.append(WeWashReservationTimeSensor(coordinator, entry.entry_id))
         entities.append(WeWashReservationTimeoutSensor(coordinator, entry.entry_id))
         entities.append(WeWashReservationPriceSensor(coordinator, entry.entry_id))
@@ -49,7 +50,7 @@ class WeWashReservationBaseSensor(CoordinatorEntity, SensorEntity):
 class WeWashReservationStatusSensor(WeWashReservationBaseSensor):
     def __init__(self, coordinator, entry_id):
         super().__init__(coordinator, entry_id)
-        self._attr_name = "Reservation Active"
+        self._attr_name = "Status"
         self._attr_icon = "mdi:ticket-confirmation"
         self._attr_unique_id = f"wewash_{entry_id}_reservation_status"
 
@@ -69,6 +70,20 @@ class WeWashReservationApplianceSensor(WeWashReservationBaseSensor):
     def native_value(self):
         res = self._get_active_reservation()
         return res.get("applianceShortName") if res else None
+
+class WeWashReservationApplianceTypeSensor(WeWashReservationBaseSensor):
+    def __init__(self, coordinator, entry_id):
+        super().__init__(coordinator, entry_id)
+        self._attr_name = "Appliance Type"
+        self._attr_icon = "mdi:washing-machine"
+        self._attr_unique_id = f"wewash_{entry_id}_reservation_appliance_type"
+
+    @property
+    def native_value(self):
+        res = self._get_active_reservation()
+        if not res or not res.get("applianceType"):
+            return None
+        return res.get("applianceType").replace("_", " ").lower()
 
 class WeWashReservationTimeSensor(WeWashReservationBaseSensor):
     def __init__(self, coordinator, entry_id):
@@ -103,7 +118,7 @@ class WeWashReservationTimeoutSensor(WeWashReservationBaseSensor):
 class WeWashReservationPriceSensor(WeWashReservationBaseSensor):
     def __init__(self, coordinator, entry_id):
         super().__init__(coordinator, entry_id)
-        self._attr_name = "Reservation Price"
+        self._attr_name = "Price"
         self._attr_icon = "mdi:cash"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_unique_id = f"wewash_{entry_id}_reservation_price"
